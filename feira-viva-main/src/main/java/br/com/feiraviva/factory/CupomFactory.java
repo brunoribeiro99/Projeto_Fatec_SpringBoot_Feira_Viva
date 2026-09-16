@@ -11,8 +11,6 @@ import java.math.BigDecimal;
 @Component
 public class CupomFactory {
 
-    // Fábrica: centraliza a criação com regras por código.
-    // Nova campanha = mudança APENAS aqui.
     public Cupom criar(String codigo) {
         return switch (codigo == null ? "" : codigo.toUpperCase()) {
             case "FEIRA10"  -> new CupomPercentual("FEIRA10", "10% de desconto no subtotal",

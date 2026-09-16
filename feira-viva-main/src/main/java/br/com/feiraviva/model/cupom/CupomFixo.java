@@ -1,4 +1,4 @@
-package br.com.feiraviva.service;
+package br.com.feiraviva.model.cupom;
 
 import java.math.BigDecimal;
 
@@ -13,6 +13,6 @@ public class CupomFixo extends Cupom {
 
     @Override
     public BigDecimal calcularDesconto(BigDecimal subtotal) {
-        return valor.min(subtotal);      // R7: desconto nunca supera o subtotal
+        return valor.min(subtotal);   // R7: teto = subtotal (nunca negativa)
     }
 }

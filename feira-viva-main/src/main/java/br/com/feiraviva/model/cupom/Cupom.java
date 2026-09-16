@@ -1,4 +1,4 @@
-package br.com.feiraviva.service;
+package br.com.feiraviva.model.cupom;
 
 import java.math.BigDecimal;
 

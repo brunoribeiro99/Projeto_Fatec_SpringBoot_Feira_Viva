@@ -71,6 +71,7 @@ public class PedidoService {
         pedido.setNumero(String.format("FV-%04d", pedido.getId()));  // dirty checking persiste
 
         carrinho.getItens().clear();   // carrinho zerado após a compra
+        carrinho.setCodigoCupom(null);   // cupom não sobrevive à compra
         return paraResponse(pedido);
     }
 
@@ -118,5 +119,4 @@ public class PedidoService {
         return new PedidoResponseDTO(p.getId(), p.getNumero(), p.getStatus().name(),
                 p.getSubtotal(), p.getFrete(), p.getTotal(), itens);
     }
-
 }

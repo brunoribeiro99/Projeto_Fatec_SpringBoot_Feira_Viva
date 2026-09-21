@@ -26,7 +26,18 @@ public class Carrinho {
     public Carrinho(Cliente cliente) { this.cliente = cliente; }
 
     @Column(name = "codigo_cupom", length = 20)
-    private String codigoCupom;      // + getter/setter
+    private String codigoCupom;
+
+    public String getEstrategiaFrete() {
+        return estrategiaFrete;
+    }
+
+    public void setEstrategiaFrete(String estrategiaFrete) {
+        this.estrategiaFrete = estrategiaFrete;
+    }
+
+    @Column(name = "estrategia_frete", length = 20)
+    private String estrategiaFrete;
 
     // getters e setters (gerar pelo IDE)
 

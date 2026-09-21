@@ -32,5 +32,11 @@ public class ProdutoController {
 
         return produtoService.buscar(id);
     }
+    @Operation(summary = "Adicionar item ao carrinho",
+            description = "Aplica a regra R1 (estoque); soma quantidade se o produto já estiver no carrinho.")
+    @ApiResponse(responseCode = "201", description = "Item adicionado")
+    @ApiResponse(responseCode = "400", description = "DTO inválido (quantidade < 1)")
+    @ApiResponse(responseCode = "404", description = "Cliente ou produto não encontrado")
+    @ApiResponse(responseCode = "409", description = "Produto sem estoque")
 
 }

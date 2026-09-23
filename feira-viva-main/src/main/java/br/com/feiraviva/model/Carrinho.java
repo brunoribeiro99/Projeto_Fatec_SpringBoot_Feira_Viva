@@ -1,5 +1,4 @@
 package br.com.feiraviva.model;
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,22 +21,15 @@ public class Carrinho {
 
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
-    protected Carrinho() { }
-    public Carrinho(Cliente cliente) { this.cliente = cliente; }
-
     @Column(name = "codigo_cupom", length = 20)
     private String codigoCupom;
 
-    public String getEstrategiaFrete() {
-        return estrategiaFrete;
-    }
-
-    public void setEstrategiaFrete(String estrategiaFrete) {
-        this.estrategiaFrete = estrategiaFrete;
-    }
-
     @Column(name = "estrategia_frete", length = 20)
     private String estrategiaFrete;
+
+    protected Carrinho() { }
+    public Carrinho(Cliente cliente) { this.cliente = cliente; }
+
 
     // getters e setters (gerar pelo IDE)
 
@@ -47,14 +39,6 @@ public class Carrinho {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigoCupom() {
-        return codigoCupom;
-    }
-
-    public void setCodigoCupom(String codigoCupom) {
-        this.codigoCupom = codigoCupom;
     }
 
     public Cliente getCliente() {
@@ -79,5 +63,22 @@ public class Carrinho {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public String getCodigoCupom() {
+        return codigoCupom;
+    }
+
+    public void setCodigoCupom(String codigoCupom) {
+
+        this.codigoCupom = codigoCupom;
+    }
+
+    public String getEstrategiaFrete() {
+        return estrategiaFrete;
+    }
+
+    public void setEstrategiaFrete(String estrategiaFrete) {
+        this.estrategiaFrete = estrategiaFrete;
     }
 }

@@ -19,21 +19,30 @@ public class CategoriaService {
 
     @Transactional(readOnly = true)
     public List<CategoriaArvoreDTO> arvore() {
-        var todas = categoriaRepository.findAll();          // 1 select só
+        // 1 único SELECT no banco (evita o problema de N+1)
+        var todas = categoriaRepository.findAll();
+
+        // Filtra apenas as raízes (que não têm pai) e inicia a recursão
         return todas.stream()
-                .filter(c -> c.getCategoriaPai() == null)   // raízes
-                .map(raiz -> montar(raiz, todas))           // recursão Composite
+                .filter(c -> c.getCategoriaPai() == null)
+                .map(raiz -> montar(raiz, todas))
                 .toList();
     }
 
+    // Método recursivo (Composite)
     private CategoriaArvoreDTO montar(Categoria c, List<Categoria> todas) {
         var filhas = todas.stream()
                 .filter(f -> f.getCategoriaPai() != null
                         && f.getCategoriaPai().getId().equals(c.getId()))
-                .map(f -> montar(f, todas))
+                .map(f -> montar(f, todas)) // recursão
                 .toList();
-        return new CategoriaArvoreDTO(c.getId(), c.getNome(), c.getDescricao(),
+
+        return new CategoriaArvoreDTO(
+                c.getId(),
+                c.getNome(),
                 c.getCategoriaPai() == null ? null : c.getCategoriaPai().getId(),
-                filhas.isEmpty(), filhas);
+                filhas.isEmpty(),
+                filhas
+        );
     }
 }

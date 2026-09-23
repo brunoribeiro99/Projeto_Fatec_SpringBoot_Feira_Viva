@@ -146,18 +146,57 @@ public class CarrinhoService {
         return paraResponse(carrinho);
     }
 
+//    private CarrinhoResponseDTO paraResponse(Carrinho c) {
+//        var itens = c.getItens().stream()
+//                .map(i -> new ItemResponseDTO(i.getId(), i.getProduto().getId(),
+//                        i.getProduto().getNome(), i.getQuantidade(),
+//                        i.getPrecoUnitario(), i.getSubtotal()))
+//                .toList();
+//        var subtotal = c.getItens().stream()
+//                .map(ItemCarrinho::getSubtotal)
+//                .reduce(BigDecimal.ZERO, BigDecimal::add);
+//        var frete = calcularFrete(subtotal);
+//        return new CarrinhoResponseDTO(c.getId(), itens, subtotal, frete, subtotal.add(frete));
+//    }
+
+//private CarrinhoResponseDTO paraResponse(Carrinho c) {
+//    var itens = c.getItens().stream()
+//            .map(i -> new ItemResponseDTO(i.getId(), i.getProduto().getId(),
+//                    i.getProduto().getNome(), i.getQuantidade(),
+//                    i.getPrecoUnitario(), i.getSubtotal()))
+//            .toList();
+//    var subtotal = c.getItens().stream()
+//            .map(ItemCarrinho::getSubtotal)
+//            .reduce(BigDecimal.ZERO, BigDecimal::add);
+//    var frete = calcularFrete(subtotal);
+
+//    BigDecimal desconto = BigDecimal.ZERO;
+//    String cupomAplicado = null;
+//    if (c.getCodigoCupom() != null) {
+//        var cupom = cupomFactory.criar(c.getCodigoCupom());
+//        desconto = cupom.calcularDesconto(subtotal);
+//        cupomAplicado = cupom.getCodigo();
+//    }
+//
+//    var total = subtotal.add(frete).subtract(desconto);
+//    return new CarrinhoResponseDTO(c.getId(), itens, cupomAplicado,
+//            desconto, subtotal, frete, total);
+//    }
+
     private CarrinhoResponseDTO paraResponse(Carrinho c) {
         var itens = c.getItens().stream()
                 .map(i -> new ItemResponseDTO(i.getId(), i.getProduto().getId(),
                         i.getProduto().getNome(), i.getQuantidade(),
                         i.getPrecoUnitario(), i.getSubtotal()))
                 .toList();
+
         var subtotal = c.getItens().stream()
                 .map(ItemCarrinho::getSubtotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        // Usa a Strategy (se não tiver nada salvo, assume PADRAO)
         var estrategia = c.getEstrategiaFrete() == null ? "PADRAO" : c.getEstrategiaFrete();
-        var frete = calculadoraFrete.calcular(estrategia, subtotal);   // Strategy em ação
+        var frete = calculadoraFrete.calcular(estrategia, subtotal);
 
         BigDecimal desconto = BigDecimal.ZERO;
         String cupomAplicado = null;
@@ -168,13 +207,14 @@ public class CarrinhoService {
         }
 
         var total = subtotal.add(frete).subtract(desconto);
+
         return new CarrinhoResponseDTO(c.getId(), itens, cupomAplicado, desconto,
                 estrategia, subtotal, frete, total);
     }
-
-    // diagnóstico didático — removível no deploy
-    public long identityHashCodeConfiguracoes() {
-
-        return System.identityHashCode(configuracoes);
-    }
+//    // REMOVER este método (diagnóstico didático — já cumpriu seu papel):
+//    // diagnóstico didático — removível no deploy
+//    public long identityHashCodeConfiguracoes() {
+//
+//        return System.identityHashCode(configuracoes);
+//    }
 }

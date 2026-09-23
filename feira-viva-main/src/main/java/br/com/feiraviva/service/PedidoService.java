@@ -66,14 +66,15 @@ public class PedidoService {
             subtotal = subtotal.add(itemPedido.getSubtotal());
         }
 
-        var estrategia = carrinho.getEstrategiaFrete() == null ? "PADRAO" : carrinho.getEstrategiaFrete();
+//        var frete = carrinhoService.calcularFrete(subtotal);
+//        pedido.setSubtotal(subtotal);
+//        pedido.setFrete(frete);
+//        pedido.setTotal(subtotal.add(frete));
+
+        var estrategia = carrinho.getEstrategiaFrete() == null ? "PADRAO" :
+                carrinho.getEstrategiaFrete();
+
         var frete = calculadoraFrete.calcular(estrategia, subtotal);
-
-        carrinho.getItens().clear();
-        carrinho.setCodigoCupom(null);
-        carrinho.setEstrategiaFrete(null);   // estratégia não sobrevive à compra
-
-
 
         pedidoRepository.save(pedido);
         pedido.setNumero(String.format("FV-%04d", pedido.getId()));  // dirty checking persiste

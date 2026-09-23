@@ -211,10 +211,4 @@ public class CarrinhoService {
         return new CarrinhoResponseDTO(c.getId(), itens, cupomAplicado, desconto,
                 estrategia, subtotal, frete, total);
     }
-//    // REMOVER este método (diagnóstico didático — já cumpriu seu papel):
-//    // diagnóstico didático — removível no deploy
-//    public long identityHashCodeConfiguracoes() {
-//
-//        return System.identityHashCode(configuracoes);
-//    }
 }

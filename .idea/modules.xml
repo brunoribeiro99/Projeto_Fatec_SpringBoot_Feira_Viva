@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Projeto_Fatec_SpringBoot_Feira_Viva-main.iml" filepath="$PROJECT_DIR$/.idea/Projeto_Fatec_SpringBoot_Feira_Viva-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feira-viva-main/feiraviva.iml" filepath="$PROJECT_DIR$/feira-viva-main/feiraviva.iml" />
     </modules>
   </component>
 </project>

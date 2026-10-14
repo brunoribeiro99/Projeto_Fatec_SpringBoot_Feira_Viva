@@ -1,15 +1,16 @@
 package br.com.feiraviva.strategy;
 
-import br.com.feiraviva.exception.ResourceNotFoundException;
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+import br.com.feiraviva.exception.ResourceNotFoundException;
 
 @Component
 public class CalculadoraFrete {
 
-    // O Spring injeta TODOS os beans StrategyFrete, chaveados pelo nome do bean
+    // O Spring injeta automaticamente: {"PADRAO": bean1, "FIXO": bean2, "RETIRADA": bean3}
     private final Map<String, StrategyFrete> strategies;
 
     public CalculadoraFrete(Map<String, StrategyFrete> strategies) {
@@ -21,7 +22,7 @@ public class CalculadoraFrete {
     }
 
     public BigDecimal calcular(String tipo, BigDecimal subtotal) {
-        var normalizado = normalizar(tipo);
+        String normalizado = normalizar(tipo);
         if (!strategies.containsKey(normalizado)) {
             throw new ResourceNotFoundException("Estratégia de frete inválida: " + tipo);
         }
@@ -29,6 +30,6 @@ public class CalculadoraFrete {
     }
 
     private String normalizar(String tipo) {
-        return (tipo == null || tipo.isBlank()) ? "PADRAO" : tipo.toUpperCase();
+        return (tipo == null || tipo.isBlank()) ? "PADRAO" : tipo.toUpperCase().trim();
     }
 }

@@ -1,9 +1,10 @@
 package br.com.feiraviva.strategy;
 
-import br.com.feiraviva.config.ConfiguracoesFeiraViva;
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+import br.com.feiraviva.config.ConfiguracoesFeiraViva;
 
 @Component("FIXO")
 public class FreteFixoStrategy implements StrategyFrete {

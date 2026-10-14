@@ -10,3 +10,4 @@ public record ItemCarrinhoDTO(
         @NotNull Long produtoId,
         @Schema(description = "Quantidade desejada (mínimo 1)", example = "2", requiredMode = Schema.RequiredMode.REQUIRED)
         @NotNull @Min(1) Integer quantidade) { }
+        

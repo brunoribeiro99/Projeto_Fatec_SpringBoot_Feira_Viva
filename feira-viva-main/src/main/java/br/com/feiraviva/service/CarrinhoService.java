@@ -1,18 +1,23 @@
 package br.com.feiraviva.service;
 
-import br.com.feiraviva.config.ConfiguracoesFeiraViva;
-import br.com.feiraviva.dto.*;
-import br.com.feiraviva.exception.RegraDeNegocioException;
-import br.com.feiraviva.exception.ResourceNotFoundException;
-import br.com.feiraviva.factory.CupomFactory;
-import br.com.feiraviva.model.*;
-import br.com.feiraviva.repository.*;
-import br.com.feiraviva.strategy.CalculadoraFrete;
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.List;
+import br.com.feiraviva.config.ConfiguracoesFeiraViva;
+import br.com.feiraviva.dto.CarrinhoResponseDTO;
+import br.com.feiraviva.dto.ItemCarrinhoDTO;
+import br.com.feiraviva.dto.ItemResponseDTO;
+import br.com.feiraviva.exception.RegraDeNegocioException;
+import br.com.feiraviva.exception.ResourceNotFoundException;
+import br.com.feiraviva.factory.CupomFactory;
+import br.com.feiraviva.model.Carrinho;
+import br.com.feiraviva.model.ItemCarrinho;
+import br.com.feiraviva.repository.CarrinhoRepository;
+import br.com.feiraviva.repository.ClienteRepository;
+import br.com.feiraviva.repository.ProdutoRepository;
+import br.com.feiraviva.strategy.CalculadoraFrete;
 
 @Service
 public class CarrinhoService {
@@ -211,4 +216,10 @@ public class CarrinhoService {
         return new CarrinhoResponseDTO(c.getId(), itens, cupomAplicado, desconto,
                 estrategia, subtotal, frete, total);
     }
+//    // REMOVER este método (diagnóstico didático — já cumpriu seu papel):
+//    // diagnóstico didático — removível no deploy
+//    public long identityHashCodeConfiguracoes() {
+//
+//        return System.identityHashCode(configuracoes);
+//    }
 }

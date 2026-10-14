@@ -20,11 +20,12 @@
 //}
 package br.com.feiraviva.service;
 
-import br.com.feiraviva.model.Produto;
-import br.com.feiraviva.repository.ProdutoRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import br.com.feiraviva.model.Produto;
+import br.com.feiraviva.repository.ProdutoRepository;
 
 @Service
 public class ProdutoService {

@@ -11,8 +11,8 @@
 	<groupId>br.com</groupId>
 	<artifactId>feiraviva</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>feiraviva</name>
+	<description>Projeto Feira Viva</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -73,26 +73,36 @@
 			<artifactId>spring-boot-starter-flyway</artifactId>
 		</dependency>
 
-		<!--			&lt;!&ndash; Módulo de suporte ao H2 (obrigatório no Flyway 10+) &ndash;&gt;-->
-		<!--			<dependency>-->
-		<!--				<groupId>org.flywaydb</groupId>-->
-		<!--				<artifactId>flyway-database-h2</artifactId>-->
-		<!--				<version>12.4.0</version>-->
-		<!--			</dependency>-->
-
-		<!-- Testes -->
-
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- JWT: jjwt (API + implementação + serialização Jackson) -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.12.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.12.6</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.6</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Testes -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -106,7 +116,7 @@
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
-				<version>12.4.0	</version>
+				<version>12.4.0</version>
 				<configuration>
 					<url>jdbc:h2:mem:feiraviva;DB_CLOSE_DELAY=-1</url>
 					<user>sa</user>
